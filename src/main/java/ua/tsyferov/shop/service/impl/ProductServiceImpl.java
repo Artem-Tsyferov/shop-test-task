@@ -2,6 +2,7 @@ package ua.tsyferov.shop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ua.tsyferov.shop.exception.ResourceNotFoundException;
 import ua.tsyferov.shop.model.Product;
@@ -25,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Product> getProductsByNameNotMatchRegexp(String regexp) {
 
         List<Product> products = productRepository.findAll();
